@@ -1,8 +1,11 @@
 package com.ecommerce.ECommerce.Website.controller;
 
+import com.ecommerce.ECommerce.Website.common.APIResponse;
 import com.ecommerce.ECommerce.Website.model.Category;
 import com.ecommerce.ECommerce.Website.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,16 +22,27 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public String createCategory(@RequestBody Category category)
+    public ResponseEntity<APIResponse> createCategory(@RequestBody Category category)
     {
         categoryService.createCategory(category);
-        return "Successful";
+        return new ResponseEntity<>(new APIResponse(true,"Successfully created new category"), HttpStatus.CREATED);
     }
 
     @GetMapping("/listCategories")
     public List<Category> listCategories()
     {
         return categoryService.listCategories();
+    }
+
+    @PostMapping("/updateCategory/{categoryID}")
+    public ResponseEntity<APIResponse> updateCategory(@PathVariable("categoryID") Integer id,@RequestBody Category category)
+    {
+        if(!categoryService.findById(id))
+        {
+            return new ResponseEntity<>(new APIResponse(false,"Faileed to update category"),HttpStatus.NOT_FOUND);
+        }
+        categoryService.editCategory(id, category);
+        return new ResponseEntity<>(new APIResponse(true,"Successfully updated category"),HttpStatus.OK);
     }
 
 }
