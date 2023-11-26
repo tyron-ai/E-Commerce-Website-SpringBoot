@@ -6,18 +6,18 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="category")
+@Table(name="categories")
 @Component
 public class Category  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "categoryName")
+    @Column(name = "category_name")
     private @NotBlank String categoryName;
     @Column(name = "description")
     private @NotBlank String description;
-    @Column(name = "imageUrl")
+    @Column(name = "image_url")
     private String imageUrl;
 
     public Integer getId() {

@@ -39,7 +39,7 @@ public class CategoryController {
     {
         if(!categoryService.findById(id))
         {
-            return new ResponseEntity<>(new APIResponse(false,"Faileed to update category"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new APIResponse(false,"Failed to update category"),HttpStatus.NOT_FOUND);
         }
         categoryService.editCategory(id, category);
         return new ResponseEntity<>(new APIResponse(true,"Successfully updated category"),HttpStatus.OK);
