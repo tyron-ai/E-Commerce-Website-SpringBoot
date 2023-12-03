@@ -13,6 +13,9 @@ public class Category  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    public Category() {
+    }
+
     @Column(name = "category_name")
     private @NotBlank String categoryName;
     @Column(name = "description")
