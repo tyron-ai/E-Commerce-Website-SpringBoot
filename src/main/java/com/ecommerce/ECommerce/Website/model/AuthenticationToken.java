@@ -3,6 +3,7 @@ package com.ecommerce.ECommerce.Website.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name="tokens")
@@ -53,5 +54,15 @@ public class AuthenticationToken {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public AuthenticationToken(User user) {
+        this.user = user;
+        this.createdDate=new Date();
+        this.token= UUID.randomUUID().toString();
+
+    }
+
+    public AuthenticationToken() {
     }
 }
