@@ -1,6 +1,8 @@
 package com.ecommerce.ECommerce.Website.controller;
 
 import com.ecommerce.ECommerce.Website.dto.ResponseDto;
+import com.ecommerce.ECommerce.Website.dto.user.SignInDto;
+import com.ecommerce.ECommerce.Website.dto.user.SignInResponseDto;
 import com.ecommerce.ECommerce.Website.dto.user.SignUpDto;
 import com.ecommerce.ECommerce.Website.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +25,12 @@ public class UserController {
     {
         return userService.signUp(signUpDto);
     }
+
+    //Sign In
+    @PostMapping("/signIn")
+    public SignInResponseDto signIn(@RequestBody SignInDto signInDto)
+    {
+        return userService.signIn(signInDto);
+    }
+
 }
