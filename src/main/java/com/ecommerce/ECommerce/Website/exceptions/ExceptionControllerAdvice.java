@@ -12,4 +12,10 @@ public class ExceptionControllerAdvice {
    {
        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
    }
+
+   @ExceptionHandler(value = AuthenticationFailException.class)
+    public final ResponseEntity<String> handleAuthenticationFail(AuthenticationFailException e)
+   {
+       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+   }
 }
