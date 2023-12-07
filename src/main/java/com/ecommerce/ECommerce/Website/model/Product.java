@@ -1,5 +1,6 @@
 package com.ecommerce.ECommerce.Website.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class Product {
 
     //Many-to-one relationship
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id")
     Category category;
 
