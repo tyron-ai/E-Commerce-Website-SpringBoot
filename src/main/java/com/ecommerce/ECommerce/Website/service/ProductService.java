@@ -1,6 +1,7 @@
 package com.ecommerce.ECommerce.Website.service;
 
 import com.ecommerce.ECommerce.Website.dto.ProductDto;
+import com.ecommerce.ECommerce.Website.exceptions.ProductNotExistException;
 import com.ecommerce.ECommerce.Website.model.Category;
 import com.ecommerce.ECommerce.Website.model.Product;
 import com.ecommerce.ECommerce.Website.repository.ProductRepository;
@@ -77,5 +78,13 @@ public class ProductService {
         Optional<Product> byId = productRepository.findById(productId);
 
         productRepository.delete(byId.get());
+    }
+
+    public Product findById(Integer productId) throws ProductNotExistException {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isEmpty()) {
+            throw new ProductNotExistException("Product id is invalid: " + productId);
+        }
+        return optionalProduct.get();
     }
 }
