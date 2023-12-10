@@ -3,6 +3,7 @@ package com.ecommerce.ECommerce.Website.service;
 import com.ecommerce.ECommerce.Website.dto.cart.AddToCartDto;
 import com.ecommerce.ECommerce.Website.dto.cart.CartDto;
 import com.ecommerce.ECommerce.Website.dto.cart.CartItemDto;
+import com.ecommerce.ECommerce.Website.exceptions.CustomException;
 import com.ecommerce.ECommerce.Website.model.Cart;
 import com.ecommerce.ECommerce.Website.model.Product;
 import com.ecommerce.ECommerce.Website.model.User;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -61,4 +63,20 @@ public class CartService {
 
     }
 
+    public void deleteCartItem(Integer cartItemId, User user) {
+        //Check if itemId belongs to the user
+        Optional<Cart> optionalCart = cartRepository.findById(cartItemId);
+
+        if (optionalCart.isEmpty()) {
+            throw new CustomException("Cart item " + cartItemId+" is invalid.");
+        }
+
+        Cart cart = optionalCart.get();
+
+        if (cart.getUser() != user) {
+            throw  new CustomException("Cart item does not belong to user");
+        }
+
+        cartRepository.delete(cart);
+    }
 }
