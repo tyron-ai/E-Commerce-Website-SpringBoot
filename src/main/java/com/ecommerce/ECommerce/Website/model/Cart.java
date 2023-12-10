@@ -13,7 +13,7 @@ public class Cart {
     private Integer id;
 
     @Column(name = "date_created")
-    private Date date_created;
+    private Date createdDate;
 
     private int quantity;
 
@@ -38,11 +38,11 @@ public class Cart {
     }
 
     public Date getCreatedDate() {
-        return date_created;
+        return createdDate;
     }
 
     public void setCreatedDate(Date date_created) {
-        this.date_created = date_created;
+        this.createdDate = date_created;
     }
 
     public Product getProduct() {
